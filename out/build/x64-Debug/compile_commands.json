@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/seth/OneDrive/Documenten/CS/2_BDAP/assignment1/out/build/x64-Debug",
+  "command": "C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP -IC:\\Users\\seth\\OneDrive\\Documenten\\CS\\2_BDAP\\assignment1\\include /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG -std:c++17 /Fosrc\\CMakeFiles\\bdap_assignment1.dir\\main.cpp.obj /FdTARGET_COMPILE_PDB /FS -c C:\\Users\\seth\\OneDrive\\Documenten\\CS\\2_BDAP\\assignment1\\src\\main.cpp",
+  "file": "C:\\Users\\seth\\OneDrive\\Documenten\\CS\\2_BDAP\\assignment1\\src\\main.cpp",
+  "output": "src\\CMakeFiles\\bdap_assignment1.dir\\main.cpp.obj"
+}
+]

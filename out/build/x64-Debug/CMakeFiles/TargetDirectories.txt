@@ -1,0 +1,5 @@
+C:/Users/seth/OneDrive/Documenten/CS/2_BDAP/assignment1/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/seth/OneDrive/Documenten/CS/2_BDAP/assignment1/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/seth/OneDrive/Documenten/CS/2_BDAP/assignment1/out/build/x64-Debug/src/CMakeFiles/bdap_assignment1.dir
+C:/Users/seth/OneDrive/Documenten/CS/2_BDAP/assignment1/out/build/x64-Debug/src/CMakeFiles/edit_cache.dir
+C:/Users/seth/OneDrive/Documenten/CS/2_BDAP/assignment1/out/build/x64-Debug/src/CMakeFiles/rebuild_cache.dir
