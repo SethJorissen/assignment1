@@ -48,11 +48,11 @@ std::vector<Email> load_emails(int seed) {
 
     // Update these paths to your setup
     // Data can be found on the departmental computers in /cw/bdap/assignment1
-    load_emails(emails, "data/Enron.txt");
-    load_emails(emails, "data/SpamAssasin.txt");
-    load_emails(emails, "data/Trec2005.txt");
-    load_emails(emails, "data/Trec2006.txt");
-    load_emails(emails, "data/Trec2007.txt");
+    load_emails(emails, "/cw/bdap/assignment1/Enron.txt");
+    load_emails(emails, "/cw/bdap/assignment1/SpamAssasin.txt");
+    load_emails(emails, "/cw/bdap/assignment1/Trec2005.txt");
+    load_emails(emails, "/cw/bdap/assignment1/Trec2006.txt");
+    load_emails(emails, "/cw/bdap/assignment1/Trec2007.txt");
 
     // Shuffle the emails
     std::default_random_engine g(seed);
