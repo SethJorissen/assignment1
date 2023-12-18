@@ -58,7 +58,7 @@ public:
             result += std::log((double)counts_[get_bucket(ngram, 1)] / (double)counts_[get_bucket(ngram, 0)]);
         }
         result = std::exp(result);
-        std::cout << "end result: " << result << std::endl;
+        std::cout << "end result: " << result / (1 + result) << std::endl;
         return result / (1 + result);
     }
 
