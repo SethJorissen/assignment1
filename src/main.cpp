@@ -121,7 +121,7 @@ int main(int argc, char *argv[]) {
 
     Accuracy metric;
     //PerceptronFeatureHashing clf{ngram, 9, 0.01};
-    NaiveBayesFeatureHashing clf{ngram, 9};
+    NaiveBayesFeatureHashing clf{ngram, 15};
     auto metric_values = stream_emails(emails, clf, metric, window);
 
     // write out the results
