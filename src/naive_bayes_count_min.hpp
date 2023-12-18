@@ -16,6 +16,8 @@ class NaiveBayesCountMin : public BaseClf<NaiveBayesCountMin> {
     int num_hashes_;
     int nSpam_;
     int nHam_;
+    int nSpamGrams_;
+    int nHamGrams_;
     std::vector<std::vector<int>> counts_;
 
 public:
@@ -26,6 +28,8 @@ public:
         , num_hashes_(num_hashes)
         , nSpam_(1)
         , nHam_(1)
+        , nSpamGrams_(1)
+        , nHamGrams_(1)
     {
         counts_.resize(num_hashes, std::vector<int>((1 << log_num_buckets_) * 2, 1));
     }
@@ -48,13 +52,13 @@ public:
     }
 
     double predict_(const Email& email) const {
-        double result = log(nSpam_ / nHam_);
+        double result = log((double)nSpam_ / (double)nHam_);
         EmailIter allngrams(email, ngram_);
         std::string_view ngram;
         while (allngrams)
         {
             ngram = allngrams.next();
-            result += log(count(ngram, 1) / count(ngram, 0));
+            result += log(((double)count(ngram, 1) / (double)nSpamGrams_) / ((double)count(ngram, 0) / (double)nHamGrams_));
         }
         return result / (1 + result);
     }
