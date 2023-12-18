@@ -46,16 +46,17 @@ public:
     }
 
     double predict_(const Email& email) const {
-        double result = log(nSpam_ / nHam_);
-        std::cout << "new result: " << result << std::endl;
+        double result = std::log(nSpam_ / nHam_);
+        std::cout << "start result: " << result << std::endl;
         EmailIter allngrams(email, ngram_);
         std::string_view ngram;
         while (allngrams)
         {
             ngram = allngrams.next();
-            result += log(counts_[get_bucket(ngram, 1)] / counts_[get_bucket(ngram, 0)]);
-            std::cout << "update: " << result << std::endl;
+            result += std::log(counts_[get_bucket(ngram, 1)] / counts_[get_bucket(ngram, 0)]);
         }
+        result = std::exp(result);
+        std::cout << "end result: " << result << std::endl;
         return result / (1 + result);
     }
 
