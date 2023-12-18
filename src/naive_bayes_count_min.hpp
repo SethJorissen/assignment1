@@ -37,12 +37,14 @@ public:
     void update_(const Email &email) {
         int isSpam = email.is_spam();
         EmailIter allngrams(email, ngram_);
+        std::string_view ngram;
         if (isSpam) {
             ++nSpam_;
             while (allngrams)
             {
+                ngram = allngrams.next();
                 for (int i = 0; i < num_hashes_; i++) {
-                    ++counts_[i][get_bucket(allngrams.next(), isSpam, i)];
+                    ++counts_[i][get_bucket(ngram, isSpam, i)];
                 }
                 ++nSpamGrams_;
             }
@@ -51,8 +53,9 @@ public:
             ++nHam_;
             while (allngrams)
             {
+                ngram = allngrams.next();
                 for (int i = 0; i < num_hashes_; i++) {
-                    ++counts_[i][get_bucket(allngrams.next(), isSpam, i)];
+                    ++counts_[i][get_bucket(ngram, isSpam, i)];
                 }
                 ++nHamGrams_;
             }
