@@ -54,7 +54,6 @@ public:
             ngram = allngrams.next();
             result += log(counts_[get_bucket(ngram, 1)] / counts_[get_bucket(ngram, 0)]);
         }
-        std::cout << result;
         return result / (1 + result);
     }
 
@@ -62,7 +61,7 @@ public:
         std::cout << "nSpam: " << nSpam_ << std::endl;
         std::cout << "nHam: " << nHam_ << std::endl;
         std::cout << "counts: [";
-        for (int i; i < 10; i++) {
+        for (int i; i < (1 << log_num_buckets_); i++) {
             std::cout << counts_[i] << ", ";
         }
         std::cout << "]" << std::endl;
