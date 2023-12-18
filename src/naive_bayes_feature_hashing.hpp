@@ -54,6 +54,7 @@ public:
             ngram = allngrams.next();
             result += log(counts_[get_bucket(ngram, 1)] / counts_[get_bucket(ngram, 0)]);
         }
+        std::cout << result;
         return result / (1 + result);
     }
 
