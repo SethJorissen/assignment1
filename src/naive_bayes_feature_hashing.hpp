@@ -58,13 +58,13 @@ public:
     }
 
     void printValues() {
-        std::cout << 'nSpam: ' << nSpam_ << std::endl;
-        std::cout << 'nHam: ' << nHam_ << std::endl;
-        std::cout << 'counts: [';
+        std::cout << "nSpam: " << nSpam_ << std::endl;
+        std::cout << "nHam: " << nHam_ << std::endl;
+        std::cout << "counts: [";
         for (int i; i < 10; i++) {
-            std::cout << counts_[i] << ', ';
+            std::cout << counts_[i] << ", ";
         }
-        std::cout << ']' << std::endl;
+        std::cout << "]" << std::endl;
     }
 
 private:
