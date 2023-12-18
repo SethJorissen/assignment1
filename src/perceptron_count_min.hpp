@@ -35,7 +35,7 @@ public:
     void update_(const Email& email) {
         int isSpam = email.is_spam() * 2 + 1;
         EmailIter allngrams(email, ngram_);
-        std::vector<std::vector<double>> w (num_hashes_, std::vector<double>(1 << log_num_buckets_, 0.0);
+        std::vector<std::vector<double>> w (num_hashes_, std::vector<double>(1 << log_num_buckets_, 0.0));
         int bucket;
         std::vector<double> h (num_hashes_, 0.0);
         while (allngrams) {
@@ -47,7 +47,7 @@ public:
         }
         for (int i = 0; i < num_hashes_; i++) {
             h[i] = tanh(h[i]);
-            w[i] = scalarMulVector(w[i], learning_rate_ * (isSpam - h[i]) * (1 - h[i] * h[i]));
+            scalarMulVector(w[i], learning_rate_ * (isSpam - h[i]) * (1 - h[i] * h[i]));
             vectorSub(weights_[i], w[i]);
         }
     }
@@ -58,10 +58,10 @@ public:
         double h_i = 0.0;
         while (allngrams) {
             for (int i = 0; i < num_hashes_; i++) {
-                h_i += weights_[get_bucket(allngrams.next(), i)];
+                h_i += weights_[i][get_bucket(allngrams.next(), i)];
             }
             h += h_i / num_hashes_;
-            h_i = 0.0
+            h_i = 0.0;
         }
         return tanh(h);
     }

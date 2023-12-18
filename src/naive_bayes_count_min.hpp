@@ -27,7 +27,7 @@ public:
         , nSpam_(1)
         , nHam_(1)
     {
-        counts_.resize(num_hashes, vector<int>((1 << log_num_buckets_) * 2, 1));
+        counts_.resize(num_hashes, std::vector<int>((1 << log_num_buckets_) * 2, 1));
     }
 
     void update_(const Email &email) {

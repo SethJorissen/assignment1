@@ -43,7 +43,7 @@ public:
             h += weights_[bucket];
         }
         h = tanh(h);
-        w = scalarMulVector(w, learning_rate_ * (isSpam - h) * (1 - h * h));
+        scalarMulVector(w, learning_rate_ * (isSpam - h) * (1 - h * h));
         vectorSub(weights_, w);
     }
 
