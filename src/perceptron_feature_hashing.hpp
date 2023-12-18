@@ -33,6 +33,7 @@ public:
 
     void update_(const Email& email) {
         int isSpam = email.is_spam() * 2 - 1;
+        std::cout << "IsSpam: " << isSpam << endl;
         EmailIter allngrams(email, ngram_);
         std::vector<double> w (1 << log_num_buckets_, 0.0);
         int bucket;
@@ -43,7 +44,13 @@ public:
             h += weights_[bucket];
         }
         h = tanh(h);
+        std::cout << "Predict: " << h << endl;
         scalarMulVector(w, learning_rate_ * (isSpam - h) * (1 - h * h));
+        std::cout << "update: [";
+        for (int i; i < (1 << log_num_buckets_); i++) {
+            std::cout << w[i] << ", ";
+        }
+        std::cout << "]" << std::endl;
         vectorSub(weights_, w);
     }
 
