@@ -13,7 +13,7 @@ namespace bdap {
 class PerceptronCountMin : public BaseClf<PerceptronCountMin> {
     int ngram_;
     int log_num_buckets_;
-    int num_hashes_
+    int num_hashes_;
     double learning_rate_;
     double bias_;
     std::vector<std::vector<double>> weights_;
@@ -29,16 +29,16 @@ public:
         , learning_rate_(learning_rate)
         , bias_(0.0)
     {
-        weights_.resize(num_hashes_, vector<int>((1 << log_num_buckets_), 0.0));
+        weights_.resize(num_hashes_, vector<double>((1 << log_num_buckets_), 0.0));
     }
 
     void update_(const Email& email) {
         int isSpam = email.is_spam() * 2 + 1;
         EmailIter allngrams(email, ngram_);
-        std::vector<std::vector<int>> w (num_hashes_, vector<int>(1 << log_num_buckets_, 0);
+        std::vector<std::vector<double>> w (num_hashes_, vector<double>(1 << log_num_buckets_, 0.0);
         int bucket;
         std::vector<double> h (num_hashes_, 0.0);
-        for (allngrams) {
+        while (allngrams) {
             for (int i = 0; i < num_hashes_; i++) {
                 bucket = get_bucket(allngrams.next(), i);
                 ++w[i][bucket];
@@ -56,7 +56,7 @@ public:
         EmailIter allngrams(email, ngram_);
         double h = 0.0;
         double h_i = 0.0;
-        for (allngrams) {
+        while (allngrams) {
             for (int i = 0; i < num_hashes_; i++) {
                 h_i += weights_[get_bucket(allngrams.next(), i)];
             }

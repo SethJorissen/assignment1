@@ -82,7 +82,7 @@ namespace bdap {
             }
         }
 
-        double get_precision() const { return tr_pos / pr_pos; }
+        double get_precision() const { return tr_pos / pos; }
         double get_error() const { return 1.0 - get_precision(); }
 
         double get_score() const { return get_precision(); }

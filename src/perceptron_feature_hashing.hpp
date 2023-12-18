@@ -34,10 +34,10 @@ public:
     void update_(const Email& email) {
         int isSpam = email.is_spam() * 2 + 1;
         EmailIter allngrams(email, ngram_);
-        std::vector<int> w (1 << log_num_buckets_, 0);
+        std::vector<double> w (1 << log_num_buckets_, 0.0);
         int bucket;
         double h = 0.0;
-        for (allngrams) {
+        while (allngrams) {
             bucket = get_bucket(allngrams.next());
             ++w[bucket];
             h += weights_[bucket];
@@ -50,7 +50,7 @@ public:
     double predict_(const Email& email) const {
         EmailIter allngrams(email, ngram_);
         double h = 0.0;
-        for (allngrams) {
+        while (allngrams) {
             h += weights_[get_bucket(allngrams.next())];
         }
         return tanh(h);
@@ -62,7 +62,7 @@ private:
     { return get_bucket(hash(ngram, seed_)); }
 
     size_t get_bucket(size_t hash) const {
-        hash &= pow(2, log_num_buckets) - 1;
+        hash &= pow(2, log_num_buckets_) - 1;
         return hash;
     }
 };
