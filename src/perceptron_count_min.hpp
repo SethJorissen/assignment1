@@ -77,11 +77,11 @@ private:
     }
 
     void scalarMulVector(std::vector<double>& v, double k) {
-        transform(v.begin(), v.end(), v.begin(), [k](double& c) { return c * k; });
+        std::transform(v.begin(), v.end(), v.begin(), [k](double& c) { return c * k; });
     }
 
     void vectorSub(std::vector<double>& v1, std::vector<double>& v2) {
-        transform(v1.begin(), v1.end(), v2.begin(), v1.begin(), [](double a, double b) { return a - b; });
+        std::transform(v1.begin(), v1.end(), v2.begin(), v1.begin(), [](double a, double b) { return a - b; });
     }
 };
 
