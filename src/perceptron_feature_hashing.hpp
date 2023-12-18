@@ -44,14 +44,14 @@ public:
             h += weights_[bucket];
         }
         h = tanh(h);
-        std::cout << "Predict: " << h << std::endl;
-        //scalarMulVector(w, learning_rate_ * (isSpam - h) * (1 - h * h));
-        scalarMulVector(w, learning_rate_ * (isSpam - h));
-        std::cout << "update: [";
-        for (int i; i < (1 << log_num_buckets_); i++) {
-            std::cout << w[i] << ", ";
-        }
-        std::cout << "]" << std::endl;
+        //std::cout << "Predict: " << h << std::endl;
+        scalarMulVector(w, learning_rate_ * (isSpam - h) * (1 - h * h));
+        //scalarMulVector(w, learning_rate_ * (isSpam - h));
+        //std::cout << "update: [";
+        //for (int i; i < (1 << log_num_buckets_); i++) {
+        //    std::cout << w[i] << ", ";
+        //}
+        //std::cout << "]" << std::endl;
         vectorSub(weights_, w);
     }
 

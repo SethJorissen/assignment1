@@ -38,9 +38,11 @@ public:
         std::vector<std::vector<double>> w (num_hashes_, std::vector<double>(1 << log_num_buckets_, 0.0));
         int bucket;
         std::vector<double> h (num_hashes_, 0.0);
+        std::string_view ngram;
         while (allngrams) {
+            ngram = allngrams.next()
             for (int i = 0; i < num_hashes_; i++) {
-                bucket = get_bucket(allngrams.next(), i);
+                bucket = get_bucket(ngram, i);
                 ++w[i][bucket];
                 h[i] += weights_[i][bucket];
             }
