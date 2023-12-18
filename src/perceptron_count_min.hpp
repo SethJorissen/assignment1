@@ -58,9 +58,11 @@ public:
         EmailIter allngrams(email, ngram_);
         double h = 0.0;
         double h_i = 0.0;
+        std::string_view ngram;
         while (allngrams) {
+            ngram = allngrams.next();
             for (int i = 0; i < num_hashes_; i++) {
-                h_i += weights_[i][get_bucket(allngrams.next(), i)];
+                h_i += weights_[i][get_bucket(ngram, i)];
             }
             h += h_i / num_hashes_;
             h_i = 0.0;
