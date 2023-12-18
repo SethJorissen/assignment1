@@ -120,9 +120,9 @@ int main(int argc, char *argv[]) {
               << std::endl;
 
     Accuracy metric;
-    //PerceptronFeatureHashing clf{ngram, 9, 0.01};
+    //PerceptronFeatureHashing clf{ngram, 9, 0.0001};
     //NaiveBayesFeatureHashing clf{ngram, 20};
-    NaiveBayesCountMin clf{ ngram, 5, 9 };
+    NaiveBayesCountMin clf{ ngram, 10, 9 };
     auto metric_values = stream_emails(emails, clf, metric, window);
 
     // write out the results
