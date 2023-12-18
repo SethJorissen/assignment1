@@ -46,6 +46,8 @@ public:
     }
 
     double predict_(const Email& email) const {
+        std::cout << "nSpam: " << nSpam_ << std::endl;
+        std::cout << "nHam: " << nHam_ << std::endl;
         double result = std::log(nSpam_ / nHam_);
         std::cout << "start result: " << result << ", before log: " << nSpam_ / nHam_ << std::endl;
         EmailIter allngrams(email, ngram_);
