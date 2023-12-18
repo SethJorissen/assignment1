@@ -20,7 +20,7 @@ class NaiveBayesFeatureHashing : public BaseClf<NaiveBayesFeatureHashing> {
 public:
     /** Do not change the signature of the constructor! */
     NaiveBayesFeatureHashing(int ngram, int log_num_buckets)
-        : BaseClf(0.0 /* set appropriate threshold */)
+        : BaseClf(0.5 /* set appropriate threshold */)
         , seed_(0xfa4f8cc)
         , ngram_(ngram)
         , log_num_buckets_(log_num_buckets)
@@ -58,6 +58,7 @@ public:
             result += std::log(((double)counts_[get_bucket(ngram, 1)] / (double)nSpam_)
                 / ((double)counts_[get_bucket(ngram, 0)] / (double)nHam_));
         }
+        std::cout << "result: " << result << std::endl;
         result = std::exp(result);
         std::cout << "end result: " << result / (1 + result) << std::endl;
         return result / (1 + result);
