@@ -39,14 +39,22 @@ public:
         EmailIter allngrams(email, ngram_);
         if (isSpam) {
             ++nSpam_;
+            while (allngrams)
+            {
+                for (int i = 0; i < num_hashes_; i++) {
+                    ++counts_[i][get_bucket(allngrams.next(), isSpam, i)];
+                }
+                ++nSpamGrams_;
+            }
         }
         else {
             ++nHam_;
-        }
-        while (allngrams)
-        {
-            for (int i = 0; i < num_hashes_; i++) {
-                ++counts_[i][get_bucket(allngrams.next(), isSpam, i)];
+            while (allngrams)
+            {
+                for (int i = 0; i < num_hashes_; i++) {
+                    ++counts_[i][get_bucket(allngrams.next(), isSpam, i)];
+                }
+                ++nHamGrams_;
             }
         }
     }
