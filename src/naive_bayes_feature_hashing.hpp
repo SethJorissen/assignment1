@@ -55,7 +55,8 @@ public:
         while (allngrams)
         {
             ngram = allngrams.next();
-            result += std::log((double)counts_[get_bucket(ngram, 1)] / (double)counts_[get_bucket(ngram, 0)]);
+            result += std::log(((double)counts_[get_bucket(ngram, 1)] / (double)nSpam_)
+                / ((double)counts_[get_bucket(ngram, 0)] / (double)nHam_);
         }
         result = std::exp(result);
         std::cout << "end result: " << result / (1 + result) << std::endl;
