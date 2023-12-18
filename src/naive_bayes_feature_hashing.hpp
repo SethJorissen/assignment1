@@ -61,7 +61,7 @@ public:
         std::cout << "nSpam: " << nSpam_ << std::endl;
         std::cout << "nHam: " << nHam_ << std::endl;
         std::cout << "counts: [";
-        for (int i; i < (1 << log_num_buckets_); i++) {
+        for (int i; i < 2*(1 << log_num_buckets_); i++) {
             std::cout << counts_[i] << ", ";
         }
         std::cout << "]" << std::endl;
