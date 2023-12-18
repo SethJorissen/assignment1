@@ -43,8 +43,8 @@ public:
             h += weights_[bucket];
         }
         h = tanh(h);
-        w = learning_rate_ * (isSpam - h) * (1 - h * h) * w;
-        weights_ -= w;
+        w = scalarMulVector(w, learning_rate_ * (isSpam - h) * (1 - h * h));
+        vectorSub(weights_, w);
     }
 
     double predict_(const Email& email) const {
@@ -62,8 +62,16 @@ private:
     { return get_bucket(hash(ngram, seed_)); }
 
     size_t get_bucket(size_t hash) const {
-        hash &= pow(2, log_num_buckets_) - 1;
+        hash &= (1 << log_num_buckets_) - 1;
         return hash;
+    }
+
+    void scalarMulVector(vector<int>& v, int k) {
+        transform(v.begin(), v.end(), v.begin(), [k](double& c) { return c * k; });
+    }
+
+    void vectorSub(vector<double>& v1, vector<double>& v2) {
+        transform(v1.begin(), v1.end(), v2.begin(), v1.begin(), [](double a, double b) { return a - b; });
     }
 };
 

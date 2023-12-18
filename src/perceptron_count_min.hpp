@@ -29,13 +29,13 @@ public:
         , learning_rate_(learning_rate)
         , bias_(0.0)
     {
-        weights_.resize(num_hashes_, vector<double>((1 << log_num_buckets_), 0.0));
+        weights_.resize(num_hashes_, std::vector<double>((1 << log_num_buckets_), 0.0));
     }
 
     void update_(const Email& email) {
         int isSpam = email.is_spam() * 2 + 1;
         EmailIter allngrams(email, ngram_);
-        std::vector<std::vector<double>> w (num_hashes_, vector<double>(1 << log_num_buckets_, 0.0);
+        std::vector<std::vector<double>> w (num_hashes_, std::vector<double>(1 << log_num_buckets_, 0.0);
         int bucket;
         std::vector<double> h (num_hashes_, 0.0);
         while (allngrams) {
@@ -47,8 +47,8 @@ public:
         }
         for (int i = 0; i < num_hashes_; i++) {
             h[i] = tanh(h[i]);
-            w[i] = learning_rate_ * (isSpam - h[i]) * (1 - h[i] * h[i]) * w[i];
-            weights_[i] -= w[i];
+            w[i] = scalarMulVector(w[i], learning_rate_ * (isSpam - h[i]) * (1 - h[i] * h[i]));
+            vectorSub(weights_[i], w[i]);
         }
     }
 
@@ -74,6 +74,14 @@ private:
     size_t get_bucket(size_t hash) const {
         hash &= (1 << log_num_buckets_) - 1;
         return hash;
+    }
+
+    void scalarMulVector(vector<double>& v, double k) {
+        transform(v.begin(), v.end(), v.begin(), [k](double& c) { return c * k; });
+    }
+
+    void vectorSub(vector<double>& v1, vector<double>& v2) {
+        transform(v1.begin(), v1.end(), v2.begin(), v1.begin(), [](double a, double b) { return a - b; });
     }
 };
 
