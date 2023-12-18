@@ -133,6 +133,7 @@ int main(int argc, char *argv[]) {
         outfile << metric_value << std::endl;
 
     // just for fun, evaluate a single email:
+    clf.printValues();
     Email email1("EMAIL> label=1", "free try now lot money king rich");
     Email email2("EMAIL> label=1", "winner uniqu chanc pharmaci");
     Email email3("EMAIL> label=0", "pass multipl mix argument to sub pass refer hash publish array unknown number element file call delet publish publish file current begin achev result regard ben ben edward bristol uk problem email use http www gurtlush org uk profil php uid email address email sent may defunct unsubscrib e mail beginn unsubscrib perl org addit command e mail beginn help perl org http learn perl org");

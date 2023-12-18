@@ -57,6 +57,16 @@ public:
         return result / (1 + result);
     }
 
+    void printValues() {
+        std::cout << 'nSpam: ' << nSpam_ << std::endl;
+        std::cout << 'nHam: ' << nHam_ << std::endl;
+        std::cout << 'counts: [';
+        for (int i; i < 10; i++) {
+            std::cout << counts_[i] << ', ';
+        }
+        std::cout << ']' << std::endl;
+    }
+
 private:
     size_t get_bucket(std::string_view ngram, int is_spam) const {
         return get_bucket(hash(ngram, seed_), is_spam);
