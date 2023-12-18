@@ -40,7 +40,7 @@ public:
         std::vector<double> h (num_hashes_, 0.0);
         std::string_view ngram;
         while (allngrams) {
-            ngram = allngrams.next()
+            ngram = allngrams.next();
             for (int i = 0; i < num_hashes_; i++) {
                 bucket = get_bucket(ngram, i);
                 ++w[i][bucket];
