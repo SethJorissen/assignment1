@@ -33,7 +33,7 @@ public:
     }
 
     void update_(const Email& email) {
-        int isSpam = email.is_spam() * 2 + 1;
+        int isSpam = email.is_spam() * 2 - 1;
         EmailIter allngrams(email, ngram_);
         std::vector<std::vector<double>> w (num_hashes_, std::vector<double>(1 << log_num_buckets_, 0.0));
         int bucket;
