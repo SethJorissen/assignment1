@@ -15,6 +15,8 @@ class NaiveBayesFeatureHashing : public BaseClf<NaiveBayesFeatureHashing> {
     int log_num_buckets_;
     int nSpam_;
     int nHam_;
+    int nSpamGrams_;
+    int nHamGrams_;
     std::vector<int> counts_;
 
 public:
@@ -26,6 +28,8 @@ public:
         , log_num_buckets_(log_num_buckets)
         , nSpam_(1)
         , nHam_(1)
+        , nSpamGrams_(1)
+        , nHamGrams_(1)
     {
         counts_.resize((1 << log_num_buckets_) * 2, 1);
     }
@@ -35,13 +39,19 @@ public:
         EmailIter allngrams(email, ngram_);
         if (isSpam) {
             ++nSpam_;
+            while (allngrams)
+            {
+                ++counts_[get_bucket(allngrams.next(), isSpam)];
+                ++nSpamGrams_;
+            }
         }
         else {
             ++nHam_;
-        }
-        while (allngrams)
-        {
-            ++counts_[get_bucket(allngrams.next(), isSpam)];
+            while (allngrams)
+            {
+                ++counts_[get_bucket(allngrams.next(), isSpam)];
+                ++nHamGrams_;
+            }
         }
     }
 
@@ -55,8 +65,8 @@ public:
         while (allngrams)
         {
             ngram = allngrams.next();
-            result += std::log(((double)counts_[get_bucket(ngram, 1)] / (double)nSpam_)
-                / ((double)counts_[get_bucket(ngram, 0)] / (double)nHam_));
+            result += std::log(((double)counts_[get_bucket(ngram, 1)] / (double)nSpamGrams_)
+                / ((double)counts_[get_bucket(ngram, 0)] / (double)nHamGrams_));
         }
         std::cout << "result: " << result << std::endl;
         result = std::exp(result);
@@ -66,7 +76,9 @@ public:
 
     void printValues() {
         std::cout << "nSpam: " << nSpam_ << std::endl;
+        std::cout << "nSpamGrams: " << nSpamGrams_ << std::endl;
         std::cout << "nHam: " << nHam_ << std::endl;
+        std::cout << "nHamGrams: " << nHamGrams_ << std::endl;
         std::cout << "counts: [";
         for (int i; i < 2*(1 << log_num_buckets_); i++) {
             std::cout << counts_[i] << ", ";
